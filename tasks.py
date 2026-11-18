@@ -1,8 +1,27 @@
-def agregar_tarea(tareas, titulo):
+CATEGORIA_POR_DEFECTO = "General"
+
+
+def _normalizar_categoria(categoria):
+    """Valida y normaliza una categoría: no se aceptan valores vacíos."""
+    if categoria is None:
+        raise ValueError("La categoría es obligatoria")
+    categoria = str(categoria).strip()
+    if not categoria:
+        raise ValueError("La categoría es obligatoria")
+    return categoria
+
+
+def agregar_tarea(tareas, titulo, categoria=CATEGORIA_POR_DEFECTO):
     titulo = titulo.strip()
     if not titulo:
         raise ValueError("El título es obligatorio")
-    tarea = {"id": len(tareas) + 1, "titulo": titulo, "completada": False}
+    categoria = _normalizar_categoria(categoria)
+    tarea = {
+        "id": len(tareas) + 1,
+        "titulo": titulo,
+        "categoria": categoria,
+        "completada": False,
+    }
     tareas.append(tarea)
     return tarea
 
@@ -15,5 +34,13 @@ def completar_tarea(tareas, tarea_id):
     raise ValueError("Tarea no encontrada")
 
 
-def pendientes(tareas):
-    return [t for t in tareas if not t["completada"]]
+def pendientes(tareas, categoria=None):
+    tareas_pendientes = [t for t in tareas if not t["completada"]]
+    if categoria is None:
+        return tareas_pendientes
+    categoria = _normalizar_categoria(categoria)
+    return [
+        t
+        for t in tareas_pendientes
+        if t["categoria"].casefold() == categoria.casefold()
+    ]
