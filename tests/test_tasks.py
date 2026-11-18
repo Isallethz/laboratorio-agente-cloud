@@ -85,6 +85,17 @@ class TestTasks(unittest.TestCase):
             ["Estudiar agentes cloud", "Preparar laboratorio"],
         )
 
+    def test_id_no_se_reutiliza_despues_de_eliminar(self):
+        tareas = []
+        agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
+        agregar_tarea(tareas, "Preparar laboratorio", "Universidad")
+        eliminar_tarea(tareas, 1)
+
+        nueva = agregar_tarea(tareas, "Comprar café", "Personal")
+
+        self.assertEqual(nueva["id"], 3)
+        self.assertEqual(len({t["id"] for t in tareas}), len(tareas))
+
 
 if __name__ == "__main__":
     unittest.main()
