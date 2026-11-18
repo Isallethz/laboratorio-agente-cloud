@@ -1,0 +1,12 @@
+test_agregar_tarea (test_tasks.TestTasks.test_agregar_tarea) ... ok
+test_agregar_tarea_categoria_con_espacios (test_tasks.TestTasks.test_agregar_tarea_categoria_con_espacios) ... ok
+test_agregar_tarea_categoria_vacia (test_tasks.TestTasks.test_agregar_tarea_categoria_vacia) ... ok
+test_agregar_tarea_con_categoria (test_tasks.TestTasks.test_agregar_tarea_con_categoria) ... ok
+test_completar_tarea (test_tasks.TestTasks.test_completar_tarea) ... ok
+test_filtrar_pendientes_por_categoria (test_tasks.TestTasks.test_filtrar_pendientes_por_categoria) ... ok
+test_pendientes_sin_categoria_devuelve_todas (test_tasks.TestTasks.test_pendientes_sin_categoria_devuelve_todas) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK

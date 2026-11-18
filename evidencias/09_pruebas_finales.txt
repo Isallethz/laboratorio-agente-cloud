@@ -1,0 +1,17 @@
+test_agregar_tarea (test_tasks.TestTasks.test_agregar_tarea) ... ok
+test_agregar_tarea_categoria_con_espacios (test_tasks.TestTasks.test_agregar_tarea_categoria_con_espacios) ... ok
+test_agregar_tarea_categoria_vacia (test_tasks.TestTasks.test_agregar_tarea_categoria_vacia) ... ok
+test_agregar_tarea_con_categoria (test_tasks.TestTasks.test_agregar_tarea_con_categoria) ... ok
+test_completar_tarea (test_tasks.TestTasks.test_completar_tarea) ... ok
+test_eliminar_tarea (test_tasks.TestTasks.test_eliminar_tarea) ... ok
+test_eliminar_tarea_conserva_las_demas (test_tasks.TestTasks.test_eliminar_tarea_conserva_las_demas) ... ok
+test_eliminar_tarea_inexistente (test_tasks.TestTasks.test_eliminar_tarea_inexistente) ... ok
+test_filtrar_categoria_inexistente_devuelve_lista_vacia (test_tasks.TestTasks.test_filtrar_categoria_inexistente_devuelve_lista_vacia) ... ok
+test_filtrar_pendientes_por_categoria (test_tasks.TestTasks.test_filtrar_pendientes_por_categoria) ... ok
+test_id_no_se_reutiliza_despues_de_eliminar (test_tasks.TestTasks.test_id_no_se_reutiliza_despues_de_eliminar) ... ok
+test_pendientes_sin_categoria_devuelve_todas (test_tasks.TestTasks.test_pendientes_sin_categoria_devuelve_todas) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.001s
+
+OK

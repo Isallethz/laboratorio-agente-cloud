@@ -1,0 +1,116 @@
+diff --git a/app.py b/app.py
+index 09450aa..73d5230 100644
+--- a/app.py
++++ b/app.py
+@@ -1,9 +1,13 @@
+ from tasks import agregar_tarea, completar_tarea, pendientes
+ 
+ tareas = []
+-agregar_tarea(tareas, "Estudiar agentes cloud")
+-agregar_tarea(tareas, "Preparar laboratorio")
++agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
++agregar_tarea(tareas, "Preparar laboratorio", "Universidad")
+ completar_tarea(tareas, 1)
+ 
+ for tarea in pendientes(tareas):
+-    print(f'- {tarea["id"]}: {tarea["titulo"]}')
++    print(f'- {tarea["id"]}: {tarea["titulo"]} [{tarea["categoria"]}]')
++
++print("\nPendientes de la categoría 'estudio':")
++for tarea in pendientes(tareas, "estudio"):
++    print(f'- {tarea["id"]}: {tarea["titulo"]} [{tarea["categoria"]}]')
+diff --git a/tasks.py b/tasks.py
+index 6f11288..7299418 100644
+--- a/tasks.py
++++ b/tasks.py
+@@ -1,8 +1,27 @@
+-def agregar_tarea(tareas, titulo):
++CATEGORIA_POR_DEFECTO = "General"
++
++
++def _normalizar_categoria(categoria):
++    """Valida y normaliza una categoría: no se aceptan valores vacíos."""
++    if categoria is None:
++        raise ValueError("La categoría es obligatoria")
++    categoria = str(categoria).strip()
++    if not categoria:
++        raise ValueError("La categoría es obligatoria")
++    return categoria
++
++
++def agregar_tarea(tareas, titulo, categoria=CATEGORIA_POR_DEFECTO):
+     titulo = titulo.strip()
+     if not titulo:
+         raise ValueError("El título es obligatorio")
+-    tarea = {"id": len(tareas) + 1, "titulo": titulo, "completada": False}
++    categoria = _normalizar_categoria(categoria)
++    tarea = {
++        "id": len(tareas) + 1,
++        "titulo": titulo,
++        "categoria": categoria,
++        "completada": False,
++    }
+     tareas.append(tarea)
+     return tarea
+ 
+@@ -15,5 +34,13 @@ def completar_tarea(tareas, tarea_id):
+     raise ValueError("Tarea no encontrada")
+ 
+ 
+-def pendientes(tareas):
+-    return [t for t in tareas if not t["completada"]]
++def pendientes(tareas, categoria=None):
++    tareas_pendientes = [t for t in tareas if not t["completada"]]
++    if categoria is None:
++        return tareas_pendientes
++    categoria = _normalizar_categoria(categoria)
++    return [
++        t
++        for t in tareas_pendientes
++        if t["categoria"].casefold() == categoria.casefold()
++    ]
+diff --git a/tests/test_tasks.py b/tests/test_tasks.py
+index ac86af7..585d933 100644
+--- a/tests/test_tasks.py
++++ b/tests/test_tasks.py
+@@ -15,6 +15,40 @@ class TestTasks(unittest.TestCase):
+         completar_tarea(tareas, 1)
+         self.assertEqual(pendientes(tareas), [])
+ 
++    def test_agregar_tarea_con_categoria(self):
++        tareas = []
++        tarea = agregar_tarea(tareas, "Leer documentación", "Estudio")
++        self.assertEqual(tarea["categoria"], "Estudio")
++
++    def test_agregar_tarea_categoria_vacia(self):
++        tareas = []
++        with self.assertRaises(ValueError):
++            agregar_tarea(tareas, "Practicar", "")
++
++    def test_agregar_tarea_categoria_con_espacios(self):
++        tareas = []
++        with self.assertRaises(ValueError):
++            agregar_tarea(tareas, "Practicar", "   ")
++
++    def test_filtrar_pendientes_por_categoria(self):
++        tareas = []
++        agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
++        agregar_tarea(tareas, "Comprar café", "Personal")
++        agregar_tarea(tareas, "Repasar filtrado", "estudio")
++        completar_tarea(tareas, 3)
++
++        resultado = pendientes(tareas, "ESTUDIO")
++
++        self.assertEqual([t["titulo"] for t in resultado], ["Estudiar agentes cloud"])
++
++    def test_pendientes_sin_categoria_devuelve_todas(self):
++        tareas = []
++        agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
++        agregar_tarea(tareas, "Comprar café", "Personal")
++        completar_tarea(tareas, 2)
++
++        self.assertEqual(len(pendientes(tareas)), 1)
++
+ 
+ if __name__ == "__main__":
+     unittest.main()

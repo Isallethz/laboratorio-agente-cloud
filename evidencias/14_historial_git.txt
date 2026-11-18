@@ -1,0 +1,14 @@
+*   f06218b 2026-11-18 Merge pull request #2: eliminar tarea por id
+|\  
+| * 19d245d 2026-11-18 Evitar reutilizacion de ids al agregar tareas
+| * ddc4402 2026-11-18 Agregar funcion eliminar_tarea por id
+|/  
+*   c50ee06 2026-11-18 Merge pull request #1: agregar categorias y filtrado de tareas
+|\  
+| * 977653c 2026-11-18 Agregar prueba de filtrado por categoria inexistente
+| * e08b730 2026-11-18 Agregar categorias y filtrado de tareas pendientes
+|/  
+* 42f9482 2026-11-18 Linea base del laboratorio: tareas, app y pruebas  
+  copilot/agregar-categorias 977653c Agregar prueba de filtrado por categoria inexistente
+  copilot/eliminar-tarea     19d245d Evitar reutilizacion de ids al agregar tareas
+* main                       f06218b Merge pull request #2: eliminar tarea por id

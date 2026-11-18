@@ -1,0 +1,7 @@
+IDs despues de eliminar la tarea 1: [2, 2]
+ID asignado a la tarea nueva: 2
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Documents\Laboratorios-TopicosII\lab12-Agente_Cloud\laboratorio_agente_cloud\evidencias\11_repro_id_duplicado.py", line 24, in <module>
+    assert len(ids) == len(set(ids)), f"IDs duplicados: {ids}"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: IDs duplicados: [2, 2]

@@ -25,8 +25,15 @@ laboratorio_agente_cloud/
 │   ├── sesion-agente-cloud.md
 │   └── trazabilidad.md
 ├── evidencias/             # Salidas reales de comandos y diffs revisados
-└── .github/workflows/tests.yml
+└── README.md
 ```
+
+Repositorio en GitHub: <https://github.com/Isallethz/laboratorio-agente-cloud>
+
+- Issue #1: <https://github.com/Isallethz/laboratorio-agente-cloud/issues/1>
+- Pull Request #2: <https://github.com/Isallethz/laboratorio-agente-cloud/pull/2>
+- Issue #3: <https://github.com/Isallethz/laboratorio-agente-cloud/issues/3>
+- Pull Request #4: <https://github.com/Isallethz/laboratorio-agente-cloud/pull/4>
 
 ## Cómo ejecutar
 

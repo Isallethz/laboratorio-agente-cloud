@@ -1,0 +1,2 @@
+IDs despues de eliminar la tarea 1: [2, 3]
+ID asignado a la tarea nueva: 3
