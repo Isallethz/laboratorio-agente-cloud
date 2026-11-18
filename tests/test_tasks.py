@@ -15,6 +15,40 @@ class TestTasks(unittest.TestCase):
         completar_tarea(tareas, 1)
         self.assertEqual(pendientes(tareas), [])
 
+    def test_agregar_tarea_con_categoria(self):
+        tareas = []
+        tarea = agregar_tarea(tareas, "Leer documentación", "Estudio")
+        self.assertEqual(tarea["categoria"], "Estudio")
+
+    def test_agregar_tarea_categoria_vacia(self):
+        tareas = []
+        with self.assertRaises(ValueError):
+            agregar_tarea(tareas, "Practicar", "")
+
+    def test_agregar_tarea_categoria_con_espacios(self):
+        tareas = []
+        with self.assertRaises(ValueError):
+            agregar_tarea(tareas, "Practicar", "   ")
+
+    def test_filtrar_pendientes_por_categoria(self):
+        tareas = []
+        agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
+        agregar_tarea(tareas, "Comprar café", "Personal")
+        agregar_tarea(tareas, "Repasar filtrado", "estudio")
+        completar_tarea(tareas, 3)
+
+        resultado = pendientes(tareas, "ESTUDIO")
+
+        self.assertEqual([t["titulo"] for t in resultado], ["Estudiar agentes cloud"])
+
+    def test_pendientes_sin_categoria_devuelve_todas(self):
+        tareas = []
+        agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
+        agregar_tarea(tareas, "Comprar café", "Personal")
+        completar_tarea(tareas, 2)
+
+        self.assertEqual(len(pendientes(tareas)), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
