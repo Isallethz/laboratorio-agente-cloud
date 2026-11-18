@@ -49,8 +49,8 @@ python -m unittest discover -s tests
 | Rama | Contenido |
 |------|-----------|
 | `main` | Línea base + contribuciones revisadas y aprobadas |
-| `copilot/agregar-categorias` | Contribución del agente para el issue #1 |
-| `copilot/eliminar-tarea` | Contribución del agente para el issue #2 (reto final) |
+| `copilot/agregar-categorias` | Contribución del issue #1 |
+| `copilot/eliminar-tarea` | Contribución del issue #3 (reto final) |
 
 Cada contribución se revisó archivo por archivo antes de integrarse. Las observaciones y la
 segunda iteración solicitada al agente están documentadas en `docs/revision-pr-01.md`.
