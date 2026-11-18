@@ -49,6 +49,12 @@ class TestTasks(unittest.TestCase):
 
         self.assertEqual(len(pendientes(tareas)), 1)
 
+    def test_filtrar_categoria_inexistente_devuelve_lista_vacia(self):
+        tareas = []
+        agregar_tarea(tareas, "Estudiar agentes cloud", "Estudio")
+
+        self.assertEqual(pendientes(tareas, "NoExiste"), [])
+
 
 if __name__ == "__main__":
     unittest.main()
